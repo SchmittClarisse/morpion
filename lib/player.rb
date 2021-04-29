@@ -1,8 +1,11 @@
 class Player
     attr_reader :player_name, :player_value
     
-    def initialize(name_of_player, value_of_player)
-        @player_name = name_of_player
-        @player_value = value_of_player
+    def initialize
+      puts "Bonjour merci de saisir votre nom de joueur :"  
+      @player_name = gets.chomp
+      puts "Très bien, maintenant choisis un symbole :"
+      @player_value = gets.chomp
     end
   end
+  

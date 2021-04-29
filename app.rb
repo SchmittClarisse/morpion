@@ -1,13 +1,12 @@
 require 'bundler'
 Bundler.require
 
-require_relative 'lib/player'
-require_relative 'lib/board'
-require_relative 'lib/board_case'
-require_relative 'lib/game'
-require_relative 'lib/show'
-require_relative 'lib/application'
+$:.unshift File.expand_path("./../lib", __FILE__)
+require 'game'
+require 'player'
+require 'board'
+require 'board_case'
+require 'show'
+require 'application'
 
-#Application.new.perform
-
-binding.pry 
+Application.perform

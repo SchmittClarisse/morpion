@@ -1,11 +1,20 @@
 class Board
-    attr_accessor :board, :count_turn
+    attr_accessor :grid, :count_turn
     #Optionnellement on peut aussi lui rajouter un autre sous le nom @count_turn pour compter le nombre de coups joué
   
     def initialize
       #Quand la classe s'initialize, elle doit créer 9 instances BoardCases
           #Ces instances sont rangées dans un array/hash qui est l'attr_accessor de la classe
-      @board = {"A1" => " ", "A2" => " ", "A3" => " ", "B1" => " ", "B2" => " ", "B3" => " ", "C1" => " ", "C2" => " ", "C3" => " "}
+      a1 = BoardCase.new("A1")
+      a2 = BoardCase.new("A2")
+      a3 = BoardCase.new("A3")
+      b1 = BoardCase.new("B1")
+      b2 = BoardCase.new("B2")
+      b3 = BoardCase.new("B3")
+      c1 = BoardCase.new("C1")
+      c2 = BoardCase.new("C2")
+      c3 = BoardCase.new("C3")
+      @grid = {a1.case_id => a1.value, a2.case_id => a2.value, a3.case_id => a3.value, b1.case_id => b1.value, b2.case_id => b2.value, b3.case_id => b3.value, b3.case_id => b3.value, c1.case_id => c1.value, c2.case_id => c2.value, c3.case_id => c3.value,}
       @count_turn = 0
     end
   
@@ -16,30 +25,37 @@ class Board
       print ">"
       choice = gets.chomp
       #2) change la BoardCase jouée en fonction de la valeur du joueur (X ou O)
-      @board[choice]= "#{player.player_value}"
-      puts @board
+      @grid[choice]= "#{player.player_value}"
       @count_turn = @count_turn + 1
     end
   
     def victory?
       #TO DO : une méthode qui vérifie le plateau et indique s'il y a un vainqueur ou match nul
       if @count_turn < 9
-        if  @board["A1"] == @board["A2"] && @board["A1"] == @board["A3"]
-          puts "La partie est finie et il y a un vainqueur !"
-        elsif @board["B1"] == @board["B2"] && @board["B1"] == @board["B3"]
-          puts "La partie est finie et il y a un vainqueur !"
-        elsif @board["C1"] == @board["C2"] && @board["C1"] == @board["C3"]
-          puts "La partie est finie et il y a un vainqueur !"
-        elsif @board["A1"] == @board["B1"] && @board["A1"] == @board["C1"]
-          puts "La partie est finie et il y a un vainqueur !"
-        elsif @board["A2"] == @board["B2"] && @board["A2"] == @board["C2"]
-          puts "La partie est finie et il y a un vainqueur !"
-        elsif @board["A3"] == @board["B3"] && @board["A3"] == @board["C3"]
-          puts "La partie est finie et il y a un vainqueur !"
-        elsif @board["C1"] == @board["B2"] && @board["B2"] == @board["A3"]
-          puts "La partie est finie et il y a un vainqueur !"
-        elsif @board["A1"] == @board["B2"] && @board["B2"] == @board["C3"]
-          puts "La partie est finie et il y a un vainqueur !"
+        if (@grid["A1"].include?(" ") == false) && @grid["A1"] == @grid["A2"] && @grid["A1"] == @grid["A3"]
+          puts " VICTOIRE !! "
+          return true
+        elsif (@grid["B1"].include?(" ") == false) && @grid["B1"] == @grid["B2"] && @grid["B1"] == @grid["B3"]
+          puts " VICTOIRE !! "
+          return true
+        elsif (@grid["C1"].include?(" ") == false) && @grid["C1"] == @grid["C2"] && @grid["C1"] == @grid["C3"]
+          puts " VICTOIRE !! "
+          return true
+        elsif (@grid["A1"].include?(" ") == false) && @grid["A1"] == @grid["B1"] && @grid["A1"] == @grid["C1"]
+          puts " VICTOIRE !! "
+          return true
+        elsif (@grid["A2"].include?(" ") == false) && @grid["A2"] == @grid["B2"] && @grid["A2"] == @grid["C2"]
+          puts " VICTOIRE !! "
+          return true
+        elsif (@grid["A3"].include?(" ") == false) && @grid["A3"] == @grid["B3"] && @grid["A3"] == @grid["C3"]
+          puts " VICTOIRE !! "
+          return true
+        elsif (@grid["A3"].include?(" ") == false) && @grid["C1"] == @grid["B2"] && @grid["B2"] == @grid["A3"]
+          puts " VICTOIRE !! "
+          return true
+        elsif (@grid["A1"].include?(" ") == false) && @grid["A1"] == @grid["B2"] && @grid["B2"] == @grid["C3"]
+          puts " VICTOIRE !! "
+          return true
         end
       else
         puts "La partie est finie et c'est un match nul ! :-("
